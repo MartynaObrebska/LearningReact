@@ -1,0 +1,38 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+div#exchangeCounter {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+div.counter {
+  margin-top: 10px;
+  display: block;
+}
+
+label {
+  display: block;
+  text-align: center;
+}
+select,
+input {
+  margin: 15px;
+  padding: 3px 10px;
+  font-size: 16px;
+  border: 1px solid black;
+}
