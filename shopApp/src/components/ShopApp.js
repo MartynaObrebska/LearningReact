@@ -34,7 +34,9 @@ class ShopApp extends React.Component {
       },
     ],
     products: [],
+    categories: [],
     selectedProduct: {},
+    selectedCategory: "all",
   };
 
   handleAmountChange = (e) => {
@@ -43,7 +45,15 @@ class ShopApp extends React.Component {
     });
   };
 
-  handleSelect = (e) => {
+  handleCategorySelect = (e) => {
+    this.setState({
+      ...this.state,
+      selectedCategory: e.target.value,
+      selectedProduct: this.state.products[0],
+    });
+  };
+
+  handleProductSelect = (e) => {
     const selectedProduct = this.state.products.find(
       (product) => product.id === Number(e.target.value)
     );
@@ -63,24 +73,56 @@ class ShopApp extends React.Component {
       rate: currencyInfo[1],
     }));
     const productsData = await fetchProducts();
-    const products = productsData.map((product, index) => ({
+    const productsToMap = [{ title: "-", category: "all" }, ...productsData];
+    const products = productsToMap.map((product, index) => ({
       id: index,
+      category: product.category,
       title: product.title,
       price: product.price,
       description: product.description,
       image: product.image,
     }));
+    const productsCategories = [
+      "all",
+      ...products.map((product) => product.category),
+    ];
+    const categories = [...new Set(productsCategories)];
     this.setState({
       ...this.state,
       selectedProduct: products[0],
       currencies,
+      categories,
       products,
     });
   };
 
   render() {
-    const { amount, selectedProduct, currencies, products } = this.state;
-    const optionalProducts = products.map((product) => {
+    const {
+      amount,
+      selectedProduct,
+      currencies,
+      products,
+      categories,
+      selectedCategory,
+    } = this.state;
+    const optionalCategories = categories.map((category, index) => {
+      return (
+        <option key={index} value={category}>
+          {category}
+        </option>
+      );
+    });
+    const productsInCategory = () => {
+      if (selectedCategory === "all") return products;
+      else
+        return [
+          products[0],
+          ...products.filter(
+            (product) => product.category === selectedCategory
+          ),
+        ];
+    };
+    const optionalProducts = productsInCategory().map((product) => {
       return (
         <option key={product.id} value={product.id}>
           {product.title}
@@ -91,20 +133,24 @@ class ShopApp extends React.Component {
       <div id="shop">
         <h1>Shop App</h1>
         <Selection
-          chooseProductValue={selectedProduct.id}
-          chooseProductHandleSelect={this.handleSelect}
-          chooseProductOptions={optionalProducts}
-          inputValue={amount}
-          inputHandleAmountChange={this.handleAmountChange}
+          categoryValue={selectedCategory}
+          optionalCategories={optionalCategories}
+          handleCategorySelect={this.handleCategorySelect}
+          productValue={selectedProduct.id}
+          handleProductSelect={this.handleProductSelect}
+          productOptions={optionalProducts}
+          amountValue={amount}
+          handleAmountChange={this.handleAmountChange}
         />
         <Product
+          selectedProduct={selectedProduct}
           title={selectedProduct.title}
           img={selectedProduct.image}
           description={selectedProduct.description}
-          count={amount}
           price={selectedProduct.price}
+          category={selectedProduct.category}
+          count={amount}
           currencies={currencies}
-          selectedProduct={selectedProduct}
         />
       </div>
     );

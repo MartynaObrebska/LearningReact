@@ -10,10 +10,11 @@ const Product = (props) => {
       price={props.price}
     />
   ));
-  if (props.selectedProduct) {
+  if (props.selectedProduct.image) {
     return (
       <div id="product">
         <h2>{props.title}</h2>
+        <h3 id="category">{props.category}</h3>
         <img alt={props.title} src={props.img}></img>
         <p>{props.description}</p>
         <h3>Price:</h3>

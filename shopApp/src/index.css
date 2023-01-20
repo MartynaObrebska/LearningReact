@@ -8,7 +8,7 @@ div#shop {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 20px;
+  font-size: 16px;
   width: 800px;
 }
 
@@ -19,6 +19,8 @@ h1 {
 
 div#selection {
   text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
 }
 
 label {
@@ -28,7 +30,7 @@ label {
 select,
 input {
   box-sizing: border-box;
-  width: 200px;
+  width: 180px;
   margin: 15px;
   padding: 3px 10px;
   font-size: 14px;
@@ -37,7 +39,7 @@ input {
 
 input {
   flex-grow: 1;
-  width: 80px;
+  width: 70px;
 }
 
 div#product {
@@ -45,7 +47,14 @@ div#product {
 }
 
 div#product h2 {
+  margin: 30px auto 0;
   font-size: 24px;
+}
+
+div#product #category {
+  margin-top: 0;
+  font-weight: 100;
+  color: #aaa;
 }
 
 div#product img {
@@ -67,11 +76,16 @@ div.counter:first-child {
   display: block;
   font-weight: 800;
 }
+@media (max-width: 300px) {
+  div.counter {
+    display: block;
+  }
+}
 
 @media (max-width: 800px) {
   div#shop {
     width: 90%;
-    font-size: 14px;
+    font-size: 13px;
   }
   h1 {
     font-size: 20px;
