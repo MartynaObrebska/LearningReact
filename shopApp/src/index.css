@@ -41,6 +41,11 @@ input {
   flex-grow: 1;
   width: 70px;
 }
+button#addToCart {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 
 div#product {
   text-align: center;

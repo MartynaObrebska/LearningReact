@@ -1,24 +1,12 @@
+import Options from "./Options";
+
 const Selection = (props) => (
-  <div id="selection">
+  <div className="selection">
     <label>
-      Choose category:
-      <select value={props.categoryValue} onChange={props.handleCategorySelect}>
-        {props.optionalCategories}
+      {props.labelTitle}
+      <select value={props.value} onChange={props.handleOnChange}>
+        {props.items.length > 1 && <Options items={props.items} />}
       </select>
-    </label>
-    <label>
-      Choose product:
-      <select value={props.productValue} onChange={props.handleProductSelect}>
-        {props.productOptions}
-      </select>
-    </label>
-    <label>
-      <input
-        placeholder="Type amount..."
-        type="number"
-        value={props.amountValue}
-        onChange={props.handleAmountChange}
-      />
     </label>
   </div>
 );

@@ -36,7 +36,8 @@ class ShopApp extends React.Component {
     products: [],
     categories: [],
     selectedProduct: {},
-    selectedCategory: "all",
+    selectedCategory: {},
+    selectedCurrency: {},
   };
 
   handleAmountChange = (e) => {
@@ -48,7 +49,7 @@ class ShopApp extends React.Component {
   handleCategorySelect = (e) => {
     this.setState({
       ...this.state,
-      selectedCategory: e.target.value,
+      selectedCategory: this.state.categories[e.target.value],
       selectedProduct: this.state.products[0],
     });
   };
@@ -64,15 +65,23 @@ class ShopApp extends React.Component {
     });
   };
 
+  handleCurrencyChange = (e) => {
+    this.setState({
+      ...this.state,
+      selectedCurrency: this.state.currencies[e.target.value],
+    });
+  };
+
   componentDidMount = async () => {
     const exchangeRatesData = await fetchExchangeRates();
+    const productsData = await fetchProducts();
+
     const rates = { PLN: 1, ...exchangeRatesData.rates };
     const currencies = Object.entries(rates).map((currencyInfo, index) => ({
       id: index,
       code: currencyInfo[0],
       rate: currencyInfo[1],
     }));
-    const productsData = await fetchProducts();
     const productsToMap = [{ title: "-", category: "all" }, ...productsData];
     const products = productsToMap.map((product, index) => ({
       id: index,
@@ -82,22 +91,28 @@ class ShopApp extends React.Component {
       description: product.description,
       image: product.image,
     }));
-    const productsCategories = [
+
+    const categoriesNames = new Set([
       "all",
-      ...products.map((product) => product.category),
-    ];
-    const categories = [...new Set(productsCategories)];
+      ...productsData.map((product) => product.category),
+    ]);
+    const categories = [...categoriesNames].map((category, index) => ({
+      id: index,
+      title: category,
+    }));
+
     this.setState({
       ...this.state,
-      selectedProduct: products[0],
+      products,
       currencies,
       categories,
-      products,
+      selectedCategory: categories[0],
     });
   };
 
   render() {
     const {
+      selectedCurrency,
       amount,
       selectedProduct,
       currencies,
@@ -105,52 +120,41 @@ class ShopApp extends React.Component {
       categories,
       selectedCategory,
     } = this.state;
-    const optionalCategories = categories.map((category, index) => {
-      return (
-        <option key={index} value={category}>
-          {category}
-        </option>
-      );
-    });
     const productsInCategory = () => {
-      if (selectedCategory === "all") return products;
+      if (selectedCategory.title === "all") return products;
       else
         return [
           products[0],
           ...products.filter(
-            (product) => product.category === selectedCategory
+            (product) => product.category === selectedCategory.title
           ),
         ];
     };
-    const optionalProducts = productsInCategory().map((product) => {
-      return (
-        <option key={product.id} value={product.id}>
-          {product.title}
-        </option>
-      );
-    });
+
     return (
       <div id="shop">
         <h1>Shop App</h1>
-        <Selection
-          categoryValue={selectedCategory}
-          optionalCategories={optionalCategories}
-          handleCategorySelect={this.handleCategorySelect}
-          productValue={selectedProduct.id}
-          handleProductSelect={this.handleProductSelect}
-          productOptions={optionalProducts}
+        <div id="selections">
+          <Selection
+            labelTitle={"Category:"}
+            value={selectedCategory.id}
+            handleOnChange={this.handleCategorySelect}
+            items={categories}
+          />
+          <Selection
+            labelTitle={"Product:"}
+            value={selectedProduct.id}
+            handleOnChange={this.handleProductSelect}
+            items={productsInCategory()}
+          />
+        </div>
+        <Product
+          selectedCurrency={selectedCurrency}
+          selectedProduct={selectedProduct}
+          currencies={currencies}
           amountValue={amount}
           handleAmountChange={this.handleAmountChange}
-        />
-        <Product
-          selectedProduct={selectedProduct}
-          title={selectedProduct.title}
-          img={selectedProduct.image}
-          description={selectedProduct.description}
-          price={selectedProduct.price}
-          category={selectedProduct.category}
-          count={amount}
-          currencies={currencies}
+          handleCurrencyChange={this.handleCurrencyChange}
         />
       </div>
     );

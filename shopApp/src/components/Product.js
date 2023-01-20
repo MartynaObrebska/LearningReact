@@ -1,24 +1,43 @@
+import Amount from "./Amount";
 import Counter from "./Counter";
+import Selection from "./Selection";
 const Product = (props) => {
-  const counters = props.currencies.map((currency) => (
-    <Counter
-      key={currency.id}
-      name={currency.name}
-      rate={currency.rate}
-      code={currency.code}
-      count={props.count}
-      price={props.price}
-    />
-  ));
   if (props.selectedProduct.image) {
+    const {
+      selectedCurrency,
+      amountValue,
+      price,
+      handleAmountChange,
+      selectedProduct,
+    } = props;
+    const { id, name, rate, code } = selectedCurrency;
+    const { title, category, image, description } = selectedProduct;
     return (
       <div id="product">
         <h2>{props.title}</h2>
-        <h3 id="category">{props.category}</h3>
-        <img alt={props.title} src={props.img}></img>
-        <p>{props.description}</p>
-        <h3>Price:</h3>
-        <div id="counters">{counters}</div>
+        <h3 id="category">{category}</h3>
+        <img alt={title} src={image}></img>
+        <p>{description}</p>
+        <div id="price">
+          <h3>Price:</h3>
+          <Counter
+            key={id}
+            name={name}
+            rate={rate}
+            code={code}
+            count={amountValue}
+            price={price}
+          />
+          <Selection
+            value={selectedCurrency}
+            handleOnChange={props.handleCurrencyChange}
+            items={props.currencies}
+          ></Selection>
+        </div>
+        <Amount
+          amountValue={amountValue}
+          handleAmountChange={handleAmountChange}
+        />
       </div>
     );
   }
