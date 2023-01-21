@@ -17,7 +17,9 @@ h1 {
   font-size: 32px;
 }
 
-div#selection {
+/* Selections */
+
+div#selections {
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid black;
@@ -25,11 +27,12 @@ div#selection {
 
 label {
   display: inline-block;
-  text-align: center;
 }
+
 select,
 input {
   box-sizing: border-box;
+  height: 30px;
   width: 180px;
   margin: 15px;
   padding: 3px 10px;
@@ -37,15 +40,29 @@ input {
   border: 1px solid black;
 }
 
+/* Amount */
+
 input {
   flex-grow: 1;
-  width: 70px;
+  width: 50px;
+  margin: 0;
 }
-button#addToCart {
+button {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
 }
+
+button#minus {
+  border-right: 0;
+  border-radius: 40% 0% 0% 40%;
+}
+
+button#plus {
+  border-left: 0;
+  border-radius: 0% 40% 40% 0%;
+}
+
+/* Product */
 
 div#product {
   text-align: center;
@@ -72,19 +89,14 @@ div#product p {
   text-align: justify;
 }
 
-div.counter {
-  display: inline;
+/* Counter */
+
+div#counter {
   margin: 10px 2%;
 }
 
-div.counter:first-child {
-  display: block;
-  font-weight: 800;
-}
-@media (max-width: 300px) {
-  div.counter {
-    display: block;
-  }
+div#price {
+  display: inline-block;
 }
 
 @media (max-width: 800px) {
@@ -96,15 +108,28 @@ div.counter:first-child {
     font-size: 20px;
   }
 
+  /* Selection */
+
   select,
   input {
     width: 100px;
+    height: 22px;
     font-size: 10px;
   }
 
+  /* Amount */
+
   input {
-    width: 50px;
+    width: 40px;
   }
+
+  button {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+
+  /* Product */
 
   div#product h2 {
     font-size: 18px;
@@ -115,4 +140,11 @@ div.counter:first-child {
     max-width: 150px;
     max-height: 200px;
   }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

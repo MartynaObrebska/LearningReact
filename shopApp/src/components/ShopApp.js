@@ -7,37 +7,37 @@ import fetchProducts from "../utility/fetchProducts";
 class ShopApp extends React.Component {
   state = {
     amount: 1,
-    currencies: [
-      {
-        id: 0,
-        name: "zloty",
-        rate: 1,
-        code: "PLN",
-      },
-      {
-        id: 1,
-        name: "euro",
-        rate: 4.71,
-        code: "EUR",
-      },
-      {
-        id: 2,
-        name: "dollars",
-        rate: 4.34,
-        code: "USD",
-      },
-      {
-        id: 3,
-        name: "paunds",
-        rate: 5.35,
-        code: "GBP",
-      },
-    ],
+    currencies: [],
     products: [],
     categories: [],
     selectedProduct: {},
     selectedCategory: {},
     selectedCurrency: {},
+  };
+
+  static defaultProps = {
+    currencies: [
+      {
+        id: 0,
+        title: "PLN",
+        rate: 1,
+      },
+      {
+        id: 1,
+        title: "EUR",
+        rate: 0.22,
+      },
+      {
+        id: 2,
+        title: "USD",
+        rate: 0.24,
+      },
+      {
+        id: 3,
+        title: "GBP",
+        rate: 0.2,
+      },
+    ],
   };
 
   handleAmountChange = (e) => {
@@ -65,7 +65,7 @@ class ShopApp extends React.Component {
     });
   };
 
-  handleCurrencyChange = (e) => {
+  handleCurrencySelect = (e) => {
     this.setState({
       ...this.state,
       selectedCurrency: this.state.currencies[e.target.value],
@@ -79,7 +79,7 @@ class ShopApp extends React.Component {
     const rates = { PLN: 1, ...exchangeRatesData.rates };
     const currencies = Object.entries(rates).map((currencyInfo, index) => ({
       id: index,
-      code: currencyInfo[0],
+      title: currencyInfo[0],
       rate: currencyInfo[1],
     }));
     const productsToMap = [{ title: "-", category: "all" }, ...productsData];
@@ -104,10 +104,14 @@ class ShopApp extends React.Component {
     this.setState({
       ...this.state,
       products,
-      currencies,
+      currencies: currencies.length > 1 ? currencies : this.props.currencies,
       categories,
+      selectedCurrency: currencies.length
+        ? currencies[0]
+        : this.props.currencies[0],
       selectedCategory: categories[0],
     });
+    console.log(exchangeRatesData);
   };
 
   render() {
@@ -130,7 +134,6 @@ class ShopApp extends React.Component {
           ),
         ];
     };
-
     return (
       <div id="shop">
         <h1>Shop App</h1>
@@ -152,9 +155,9 @@ class ShopApp extends React.Component {
           selectedCurrency={selectedCurrency}
           selectedProduct={selectedProduct}
           currencies={currencies}
-          amountValue={amount}
+          amount={amount}
           handleAmountChange={this.handleAmountChange}
-          handleCurrencyChange={this.handleCurrencyChange}
+          handleCurrencySelect={this.handleCurrencySelect}
         />
       </div>
     );

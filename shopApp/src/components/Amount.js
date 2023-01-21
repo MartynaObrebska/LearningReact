@@ -3,16 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Amount = (props) => {
   return (
     <label id="amount">
-      <button id="addToCart">
+      <button id="minus">
         <FontAwesomeIcon icon="minus" />
       </button>
       <input
-        placeholder="Type amount..."
         type="number"
-        value={props.amountValue}
+        value={props.amount}
         onChange={props.handleAmountChange}
       />
-      <button id="addToCart">
+      <button id="plus">
         <FontAwesomeIcon icon="plus" />
       </button>
     </label>
