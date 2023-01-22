@@ -9,6 +9,7 @@ const Counter = (props) => {
     handleCurrencySelect,
     currencies,
     handleAmountChange,
+    selectedProductAmount,
   } = props;
 
   const { id, rate } = selectedCurrency;
@@ -18,13 +19,19 @@ const Counter = (props) => {
       <div id="price">
         <span>Price:</span>
         <span>{value > 0 ? value : 0}</span>
+        <Selection
+          value={id}
+          handleOnChange={handleCurrencySelect}
+          items={currencies}
+        ></Selection>
       </div>
-      <Selection
-        value={id}
-        handleOnChange={handleCurrencySelect}
-        items={currencies}
-      ></Selection>
-      <Amount amount={amount} handleAmountChange={handleAmountChange} />
+      <Amount
+        amount={amount}
+        selectedProductAmount={selectedProductAmount}
+        handleAmountChange={handleAmountChange}
+        handleMinusClick={props.handleMinusClick}
+        handlePlusClick={props.handlePlusClick}
+      />
     </div>
   );
 };

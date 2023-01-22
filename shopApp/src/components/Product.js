@@ -20,9 +20,12 @@ const Product = (props) => {
           amount={amount}
           price={price}
           selectedCurrency={selectedCurrency}
+          selectedProductAmount={selectedProduct.amount}
           handleCurrencySelect={handleCurrencySelect}
           currencies={currencies}
           handleAmountChange={handleAmountChange}
+          handleMinusClick={props.handleMinusClick}
+          handlePlusClick={props.handlePlusClick}
         />
       </div>
     );

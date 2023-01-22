@@ -1,6 +1,8 @@
 import React from "react";
-import Selection from "./Selection";
+import Header from "./Header";
 import Product from "./Product";
+import AddedProduct from "./AddedProduct";
+import ShoppingBasket from "./ShoppingBasket";
 import fetchExchangeRates from "../utility/fetchEchangeRates";
 import fetchProducts from "../utility/fetchProducts";
 
@@ -13,6 +15,8 @@ class ShopApp extends React.Component {
     selectedProduct: {},
     selectedCategory: {},
     selectedCurrency: {},
+    shoppingBasketProducts: [],
+    shoppingBasketActive: false,
   };
 
   static defaultProps = {
@@ -62,6 +66,7 @@ class ShopApp extends React.Component {
       ...this.state,
       selectedProduct,
       amount: 1,
+      shoppingBasketActive: false,
     });
   };
 
@@ -69,6 +74,36 @@ class ShopApp extends React.Component {
     this.setState({
       ...this.state,
       selectedCurrency: this.state.currencies[e.target.value],
+    });
+  };
+
+  handleMinusClick = () => {
+    this.setState({
+      ...this.state,
+      amount: this.state.amount - 1,
+    });
+  };
+
+  handlePlusClick = () => {
+    this.setState({
+      ...this.state,
+      amount: this.state.amount + 1,
+    });
+  };
+
+  handleAddToBasketButton = () => {
+    const selectedProduct = this.state.selectedProduct.map();
+    this.setState({
+      ...this.state,
+    });
+  };
+
+  handleShoppingBasketButton = () => {
+    this.setState({
+      ...this.state,
+      selectedCategory: this.state.categories[0],
+      selectedProduct: this.state.products[0],
+      shoppingBasketActive: true,
     });
   };
 
@@ -90,7 +125,10 @@ class ShopApp extends React.Component {
       price: product.price,
       description: product.description,
       image: product.image,
+      amount: Math.floor(Math.random() * 10),
     }));
+
+    console.log(products);
 
     const categoriesNames = new Set([
       "all",
@@ -123,6 +161,8 @@ class ShopApp extends React.Component {
       products,
       categories,
       selectedCategory,
+      shoppingBasketProducts,
+      shoppingBasketActive,
     } = this.state;
     const productsInCategory = () => {
       if (selectedCategory.title === "all") return products;
@@ -136,21 +176,17 @@ class ShopApp extends React.Component {
     };
     return (
       <div id="shop">
-        <h1>Shop App</h1>
-        <div id="selections">
-          <Selection
-            labelTitle={"Category:"}
-            value={selectedCategory.id}
-            handleOnChange={this.handleCategorySelect}
-            items={categories}
-          />
-          <Selection
-            labelTitle={"Product:"}
-            value={selectedProduct.id}
-            handleOnChange={this.handleProductSelect}
-            items={productsInCategory()}
-          />
-        </div>
+        <Header
+          labelTitle1={"Category:"}
+          value1={selectedCategory.id}
+          handleOnChange1={this.handleCategorySelect}
+          items1={categories}
+          labelTitle2={"Product:"}
+          value2={selectedProduct.id}
+          handleOnChange2={this.handleProductSelect}
+          items2={productsInCategory()}
+          handleShoppingBasketButton={this.handleShoppingBasketButton}
+        />
         <Product
           selectedCurrency={selectedCurrency}
           selectedProduct={selectedProduct}
@@ -158,7 +194,14 @@ class ShopApp extends React.Component {
           amount={amount}
           handleAmountChange={this.handleAmountChange}
           handleCurrencySelect={this.handleCurrencySelect}
+          handleMinusClick={this.handleMinusClick}
+          handlePlusClick={this.handlePlusClick}
         />
+        <ShoppingBasket
+          shoppingBasketActive={shoppingBasketActive}
+          shoppingBasketProducts={shoppingBasketProducts}
+        />
+        <AddedProduct />
       </div>
     );
   }
