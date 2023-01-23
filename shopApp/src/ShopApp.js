@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "./Header";
-import Product from "./Product";
-import AddedProduct from "./AddedProduct";
-import ShoppingBasket from "./ShoppingBasket";
-import fetchExchangeRates from "../utility/fetchEchangeRates";
-import fetchProducts from "../utility/fetchProducts";
+import Header from "./components/header/Header";
+import Product from "./components/product/Product";
+import AddedProduct from "./components/addedProduct/AddedProduct";
+import ShoppingBasket from "./components/shoppingBasket/ShoppingBasket";
+import fetchExchangeRates from "./utility/fetchEchangeRates";
+import fetchProducts from "./utility/fetchProducts";
 
 class ShopApp extends React.Component {
   state = {
@@ -17,6 +17,7 @@ class ShopApp extends React.Component {
     selectedCurrency: {},
     shoppingBasketProducts: [],
     shoppingBasketActive: false,
+    popUpActive: false,
   };
 
   static defaultProps = {
@@ -92,9 +93,10 @@ class ShopApp extends React.Component {
   };
 
   handleAddToBasketButton = () => {
-    const selectedProduct = this.state.selectedProduct.map();
+    // const selectedProduct = this.state.selectedProduct.map();
     this.setState({
       ...this.state,
+      popUpActive: true,
     });
   };
 
@@ -104,6 +106,14 @@ class ShopApp extends React.Component {
       selectedCategory: this.state.categories[0],
       selectedProduct: this.state.products[0],
       shoppingBasketActive: true,
+      popUpActive: false,
+    });
+  };
+
+  handleAddedProductClose = () => {
+    this.setState({
+      ...this.state,
+      popUpActive: false,
     });
   };
 
@@ -163,6 +173,7 @@ class ShopApp extends React.Component {
       selectedCategory,
       shoppingBasketProducts,
       shoppingBasketActive,
+      popUpActive,
     } = this.state;
     const productsInCategory = () => {
       if (selectedCategory.title === "all") return products;
@@ -175,19 +186,36 @@ class ShopApp extends React.Component {
         ];
     };
     return (
-      <div id="shop">
-        <Header
-          labelTitle1={"Category:"}
-          value1={selectedCategory.id}
-          handleOnChange1={this.handleCategorySelect}
-          items1={categories}
-          labelTitle2={"Product:"}
-          value2={selectedProduct.id}
-          handleOnChange2={this.handleProductSelect}
-          items2={productsInCategory()}
-          handleShoppingBasketButton={this.handleShoppingBasketButton}
-        />
-        <Product
+      <>
+        <div id="shop">
+          <Header
+            labelTitle1={"Category:"}
+            value1={selectedCategory.id}
+            handleOnChange1={this.handleCategorySelect}
+            items1={categories}
+            labelTitle2={"Product:"}
+            value2={selectedProduct.id}
+            handleOnChange2={this.handleProductSelect}
+            items2={productsInCategory()}
+            handleShoppingBasketButton={this.handleShoppingBasketButton}
+          />
+          <Product
+            selectedCurrency={selectedCurrency}
+            selectedProduct={selectedProduct}
+            currencies={currencies}
+            amount={amount}
+            handleAmountChange={this.handleAmountChange}
+            handleCurrencySelect={this.handleCurrencySelect}
+            handleMinusClick={this.handleMinusClick}
+            handlePlusClick={this.handlePlusClick}
+            handleAddToBasketButton={this.handleAddToBasketButton}
+          />
+          <ShoppingBasket
+            shoppingBasketActive={shoppingBasketActive}
+            shoppingBasketProducts={shoppingBasketProducts}
+          />
+        </div>
+        <AddedProduct
           selectedCurrency={selectedCurrency}
           selectedProduct={selectedProduct}
           currencies={currencies}
@@ -196,13 +224,11 @@ class ShopApp extends React.Component {
           handleCurrencySelect={this.handleCurrencySelect}
           handleMinusClick={this.handleMinusClick}
           handlePlusClick={this.handlePlusClick}
+          popUpActive={popUpActive}
+          handleShoppingBasketButton={this.handleShoppingBasketButton}
+          handleAddedProductClose={this.handleAddedProductClose}
         />
-        <ShoppingBasket
-          shoppingBasketActive={shoppingBasketActive}
-          shoppingBasketProducts={shoppingBasketProducts}
-        />
-        <AddedProduct />
-      </div>
+      </>
     );
   }
 }

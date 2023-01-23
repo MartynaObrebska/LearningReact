@@ -1,4 +1,5 @@
-import Selection from "./Selection";
+import "./header.css";
+import Selection from "../selection/Selection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = (props) => {

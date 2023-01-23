@@ -1,6 +1,6 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+  margin: 0;
 }
 
 div#shop {
@@ -13,222 +13,16 @@ div#shop {
   text-align: center;
 }
 
-/* Header */
-
-div#header {
-  text-align: center;
-}
-
-div#header h1 {
-  font-size: 32px;
-}
-
-div#menu {
-  display: flex;
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid black;
-  align-items: center;
-  align-content: flex-end;
-}
-
-div#header button#shoppingBasketBtn {
-  flex-grow: 1;
-  color: #555;
-  background-color: transparent;
-  border: none;
-  font-size: 28px;
-  text-align: right;
-}
-
-/* Selection */
-
-label {
-  display: inline-block;
-}
-
+button,
 select,
-input {
-  box-sizing: border-box;
-  height: 30px;
-  width: 180px;
-  margin: 15px;
-  padding: 3px 10px;
-  font-size: 14px;
-  border: 1px solid black;
-}
-
-/* Product */
-
-div#product {
-  text-align: center;
-}
-
-div#product h2 {
-  margin: 30px auto 0;
-  font-size: 24px;
-}
-
-div#product #category {
-  margin-top: 0;
-  font-weight: 100;
-  color: #aaa;
-}
-
-div#product img {
-  width: 100%;
-  max-width: 300px;
-  max-height: 400px;
-}
-
-div#product p {
-  text-align: justify;
-}
-
-/* Counter */
-
-div#counter {
-  margin: 10px 2%;
-}
-
-div#counter span {
-  margin: 10px;
-}
-
-div#counter select {
-  width: 100px;
-}
-
-div#price {
-  display: inline-block;
-}
-
-/* Amount */
-
-label#amount {
-  display: inline-flex;
-  align-items: center;
-}
-
-input {
-  width: 50px;
-  margin: 0;
-  text-align: center;
-}
-button {
-  width: 30px;
-  height: 30px;
-  color: #fff;
-  background-color: #555;
-  border: 2px solid #555;
-}
-
-button#minus {
-  border-right: 0;
-  border-radius: 40% 0% 0% 40%;
-}
-
-button#plus {
-  border-left: 0;
-  border-radius: 0% 40% 40% 0%;
-}
-
-button.disabled {
-  opacity: 0.3;
-}
-
-button#add {
-  width: 60px;
-  border-radius: 15px 15px;
-  margin: 15px;
-  padding: 3px 10px;
-  font-size: 14px;
-}
-
-/* Shopping Basket */
-
-div#shoppingBasket div.items {
-  margin-top: 50px;
-}
-
-div#shoppingBasket div#summary {
-  border-top: 1px solid black;
-}
-
-div#shoppingBasket h3#total {
-  text-align: end;
+option {
+  cursor: pointer;
 }
 
 @media (max-width: 800px) {
   div#shop {
     width: 90%;
     font-size: 13px;
-  }
-
-  /* Header */
-
-  div#header h1 {
-    font-size: 20px;
-  }
-
-  div#header button#shoppingBasketBtn {
-    font-size: 14px;
-  }
-
-  /* Selection */
-
-  select,
-  input {
-    width: 100px;
-    height: 22px;
-    font-size: 10px;
-  }
-
-  /* Product */
-
-  div#product h2 {
-    font-size: 18px;
-  }
-
-  div#product img {
-    width: 70%;
-    max-width: 150px;
-    max-height: 200px;
-  }
-
-  /* Counter */
-
-  div#counter select {
-    width: 70px;
-  }
-
-  /* Amount */
-
-  input {
-    width: 40px;
-  }
-
-  button#plus,
-  button#minus,
-  button#add {
-    height: 22px;
-    font-size: 13px;
-  }
-
-  button#plus,
-  button#minus {
-    width: 22px;
-  }
-}
-@media (max-width: 430px) {
-  div#header button#shoppingBasketBtn {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    font-size: 22px;
-    margin: 10px;
   }
 }
 

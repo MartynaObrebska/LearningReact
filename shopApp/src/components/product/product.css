@@ -1,0 +1,44 @@
+div#product {
+  text-align: center;
+}
+
+h2 {
+  margin: 30px auto 0;
+  font-size: 24px;
+}
+
+#category {
+  margin-top: 0;
+  font-weight: 100;
+  color: #aaa;
+}
+
+img {
+  width: 100%;
+  max-width: 300px;
+  max-height: 400px;
+}
+
+p {
+  text-align: justify;
+}
+
+button#add {
+  width: 60px;
+  border-radius: 10px 10px;
+  margin: 15px;
+  padding: 3px 10px;
+  font-size: 14px;
+}
+
+@media (max-width: 800px) {
+  h2 {
+    font-size: 18px;
+  }
+
+  img {
+    width: 70%;
+    max-width: 150px;
+    max-height: 200px;
+  }
+}

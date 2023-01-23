@@ -1,5 +1,6 @@
-import ListItems from "./ListItems";
-import Summary from "./Summary";
+import "./shoppingBasket.css";
+import ListItems from "../listItems/ListItems";
+import Summary from "./summary/Summary";
 
 const ShoppingBasket = (props) => {
   if (props.shoppingBasketActive) {

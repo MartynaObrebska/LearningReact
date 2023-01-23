@@ -1,0 +1,28 @@
+div#counter {
+  margin: 10px 2%;
+}
+
+span {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+span.price {
+  width: 80px;
+}
+
+select {
+  width: 100px;
+}
+
+div#price {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+@media (max-width: 800px) {
+  div#counter select {
+    width: 70px;
+  }
+}

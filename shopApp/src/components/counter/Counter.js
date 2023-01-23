@@ -1,5 +1,6 @@
-import Selection from "./Selection";
-import Amount from "./Amount";
+import "./counter.css";
+import Selection from "../selection/Selection";
+import Amount from "../amount/Amount";
 
 const Counter = (props) => {
   const {
@@ -18,7 +19,7 @@ const Counter = (props) => {
     <div id="counter">
       <div id="price">
         <span>Price:</span>
-        <span>{value > 0 ? value : 0}</span>
+        <span className="price">{value > 0 ? value : 0}</span>
         <Selection
           value={id}
           handleOnChange={handleCurrencySelect}
@@ -31,6 +32,7 @@ const Counter = (props) => {
         handleAmountChange={handleAmountChange}
         handleMinusClick={props.handleMinusClick}
         handlePlusClick={props.handlePlusClick}
+        handleAddToBasketButton={props.handleAddToBasketButton}
       />
     </div>
   );

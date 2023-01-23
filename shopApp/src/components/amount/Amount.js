@@ -1,3 +1,4 @@
+import "./amount.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Amount = (props) => {
@@ -25,14 +26,6 @@ const Amount = (props) => {
         }
       >
         <FontAwesomeIcon icon="plus" />
-      </button>
-      <button
-        id="add"
-        onClick={props.handleAddToCartButton}
-        disabled={props.amount ? false : true}
-        className={props.amount ? "" : "disabled"}
-      >
-        Add
       </button>
     </label>
   );

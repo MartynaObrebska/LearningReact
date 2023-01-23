@@ -1,4 +1,5 @@
-import Counter from "./Counter";
+import "./product.css";
+import Counter from "../counter/Counter";
 const Product = (props) => {
   if (props.selectedProduct.image) {
     const {
@@ -8,6 +9,9 @@ const Product = (props) => {
       selectedProduct,
       currencies,
       handleCurrencySelect,
+      handleMinusClick,
+      handlePlusClick,
+      handleAddToBasketButton,
     } = props;
     const { title, category, image, description, price } = selectedProduct;
     return (
@@ -24,9 +28,17 @@ const Product = (props) => {
           handleCurrencySelect={handleCurrencySelect}
           currencies={currencies}
           handleAmountChange={handleAmountChange}
-          handleMinusClick={props.handleMinusClick}
-          handlePlusClick={props.handlePlusClick}
+          handleMinusClick={handleMinusClick}
+          handlePlusClick={handlePlusClick}
         />
+        <button
+          id="add"
+          onClick={handleAddToBasketButton}
+          disabled={amount ? false : true}
+          className={amount ? "" : "disabled"}
+        >
+          Add
+        </button>
       </div>
     );
   }

@@ -1,3 +1,4 @@
+import Item from "./item/Item";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ListItems = (props) => {
@@ -5,12 +6,12 @@ const ListItems = (props) => {
   //   if (props.shoppingBasketProducts) {
   //   return <ul>{items}</ul>;
   //   } else {
+  //   }
   return (
-    <div class="items">
+    <div className="items">
       <p>Your shopping basket is empty.</p>
     </div>
   );
-  //   }
 };
 
 export default ListItems;

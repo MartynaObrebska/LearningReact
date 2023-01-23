@@ -1,4 +1,5 @@
-import Options from "./Options";
+import "./selection.css";
+import Options from "./options/Options";
 
 const Selection = (props) => (
   <label className="selection">
