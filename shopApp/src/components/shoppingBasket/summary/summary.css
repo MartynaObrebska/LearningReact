@@ -1,7 +1,4 @@
-div#shoppingBasket div#summary {
+h2#summary {
   border-top: 1px solid black;
-}
-
-div#shoppingBasket h3#total {
   text-align: end;
 }

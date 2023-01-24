@@ -1,5 +1,6 @@
 import "./product.css";
 import Counter from "../counter/Counter";
+import Amount from "../amount/Amount";
 const Product = (props) => {
   if (props.selectedProduct.image) {
     const {
@@ -24,12 +25,16 @@ const Product = (props) => {
           amount={amount}
           price={price}
           selectedCurrency={selectedCurrency}
-          selectedProductAmount={selectedProduct.amount}
           handleCurrencySelect={handleCurrencySelect}
           currencies={currencies}
+        />
+        <Amount
+          amount={amount}
+          selectedProductAmount={selectedProduct.amount}
           handleAmountChange={handleAmountChange}
           handleMinusClick={handleMinusClick}
           handlePlusClick={handlePlusClick}
+          handleAddToBasketButton={handleAddToBasketButton}
         />
         <button
           id="add"

@@ -1,5 +1,6 @@
 import "./item.css";
 import Counter from "../../counter/Counter";
+import Amount from "../../amount/Amount";
 
 const Item = (props) => {
   const {
@@ -11,23 +12,24 @@ const Item = (props) => {
     handleAmountChange,
     handleMinusClick,
     handlePlusClick,
+    handleAddToBasketButton,
   } = props;
   const { title, image, price } = selectedProduct;
   return (
     <div id="item">
       <img alt={title} src={image}></img>
-      <h2>{title}</h2>
-      <Counter
-        amount={amount}
-        price={price}
-        selectedCurrency={selectedCurrency}
-        selectedProductAmount={selectedProduct.amount}
-        handleCurrencySelect={handleCurrencySelect}
-        currencies={currencies}
-        handleAmountChange={handleAmountChange}
-        handleMinusClick={handleMinusClick}
-        handlePlusClick={handlePlusClick}
-      />
+      <h3>{title}</h3>
+
+      <div className="amount">
+        <Amount
+          amount={amount}
+          selectedProductAmount={selectedProduct.amount}
+          handleAmountChange={handleAmountChange}
+          handleMinusClick={handleMinusClick}
+          handlePlusClick={handlePlusClick}
+          handleAddToBasketButton={handleAddToBasketButton}
+        />
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ label#amount input {
   width: 50px;
   margin: 0;
   text-align: center;
+  border: 1px solid #555;
 }
 button {
   width: 30px;
