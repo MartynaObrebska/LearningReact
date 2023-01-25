@@ -2,30 +2,40 @@ import "./amount.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Amount = (props) => {
+  const minusValue = (Number(props.amount) - 1).toString();
+  const plusValue = (Number(props.amount) + 1).toString();
+
+  const handleDisabled = () => {
+    return props.selectedProduct.stored <= Number(props.amount);
+  };
+
   return (
     <label id="amount">
       <button
         id="minus"
-        onClick={props.handleMinusClick}
-        disabled={props.amount ? false : true}
-        className={props.amount ? "" : "disabled"}
+        value={minusValue}
+        onClick={props.handleAmountChangeClick}
+        disabled={!Number(props.amount)}
+        className={!Number(props.amount) ? "disabled" : ""}
+        data-selectedid={props.selectedProduct.id}
       >
-        <FontAwesomeIcon icon="minus" />
+        <FontAwesomeIcon icon="minus" value={minusValue} />
       </button>
       <input
         type="number"
         value={props.amount}
         onChange={props.handleAmountChange}
+        data-productid={props.selectedProduct.id}
       />
       <button
         id="plus"
-        onClick={props.handlePlusClick}
-        disabled={props.selectedProductAmount === props.amount ? true : false}
-        className={
-          props.selectedProductAmount === props.amount ? "disabled" : ""
-        }
+        value={plusValue}
+        onClick={props.handleAmountChangeClick}
+        disabled={handleDisabled()}
+        className={handleDisabled() ? "disabled" : ""}
+        data-selectedid={props.selectedProduct.id}
       >
-        <FontAwesomeIcon icon="plus" />
+        <FontAwesomeIcon icon="plus" value={plusValue} />
       </button>
     </label>
   );

@@ -8,16 +8,21 @@ const ShoppingBasket = (props) => {
       <div id="shoppingBasket">
         <h2>Your shopping basket:</h2>
         <ListItems
-          shoppingBasketProducts={props.shoppingBasketProducts}
-          handleAmountChange={props.handleAmountChange}
-          handleMinusClick={props.handleMinusClick}
-          handlePlusClick={props.handlePlusClick}
+          products={props.products}
+          handleAmountChange={props.handleBasketProductAmountChange}
+          handleAmountChangeClick={props.handleBasketProductAmountChangeClick}
+          selectedCurrency={props.selectedCurrency}
+          currencies={props.currencies}
+          handleCurrencySelect={props.handleCurrencySelect}
         />
         <Summary
-          shoppingBasketProducts={props.shoppingBasketProducts}
+          products={props.products}
           selectedCurrency={props.selectedCurrency}
           handleCurrencySelect={props.handleCurrencySelect}
           currencies={props.currencies}
+          handleAmountChange={props.handleAmountChange}
+          handleAmountChangeClick={props.handleAmountChangeClick}
+          handleAddToBasketButton={props.handleAddToBasketButton}
         />
       </div>
     );

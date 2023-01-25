@@ -15,7 +15,6 @@ class ShopApp extends React.Component {
     selectedProduct: {},
     selectedCategory: {},
     selectedCurrency: {},
-    shoppingBasketProducts: [],
     shoppingBasketActive: false,
     popUpActive: false,
   };
@@ -51,6 +50,19 @@ class ShopApp extends React.Component {
     });
   };
 
+  handleBasketProductAmountChange = (e) => {
+    const products = this.state.products;
+    const basketProductToChange = products.find(
+      (product) =>
+        product.id === Number(e.target.getAttribute("data-selectedid"))
+    );
+    basketProductToChange.selected = Number(e.target.value);
+    this.setState({
+      ...this.state,
+      products,
+    });
+  };
+
   handleCategorySelect = (e) => {
     this.setState({
       ...this.state,
@@ -63,10 +75,16 @@ class ShopApp extends React.Component {
     const selectedProduct = this.state.products.find(
       (product) => product.id === Number(e.target.value)
     );
+    const amountCheck = () => {
+      if (selectedProduct.stored) {
+        return 1;
+      } else return 0;
+    };
+    const amount = amountCheck();
     this.setState({
       ...this.state,
       selectedProduct,
-      amount: 1,
+      amount,
       shoppingBasketActive: false,
     });
   };
@@ -78,43 +96,51 @@ class ShopApp extends React.Component {
     });
   };
 
-  handleMinusClick = () => {
+  handleAmountChangeClick = (e) => {
     this.setState({
       ...this.state,
-      amount: this.state.amount - 1,
+      amount: Number(e.currentTarget.value),
     });
   };
 
-  handlePlusClick = () => {
+  handleBasketProductAmountChangeClick = (e) => {
+    const products = this.state.products;
+    const basketProductToChangeIndex = products.findIndex(
+      (product) =>
+        product.id === Number(e.currentTarget.getAttribute("data-selectedid"))
+    );
+
+    products[basketProductToChangeIndex].selected = Number(
+      e.currentTarget.value
+    );
+    products[basketProductToChangeIndex].stored =
+      e.currentTarget.getAttribute("id") === "plus"
+        ? products[basketProductToChangeIndex].stored - 1
+        : products[basketProductToChangeIndex].stored + 1;
     this.setState({
       ...this.state,
-      amount: this.state.amount + 1,
+      products,
     });
   };
 
   handleAddToBasketButton = () => {
-    const selectedProduct = {
-      id: this.state.selectedProduct.id,
-      title: this.state.selectedProduct.title,
-      price: this.state.selectedProduct.price,
-      image: this.state.selectedProduct.image,
-      amount: this.state.amount,
-    };
-    const shoppingBasketProduct = Object.assign({}, selectedProduct);
     const products = this.state.products;
-    const productToChange =
-      products[
-        products.findIndex((product) => product.id === shoppingBasketProduct.id)
-      ];
-    productToChange.amount = productToChange.amount - this.state.amount;
-    this.setState((prevState) => ({
+    const productToChangeIndex = products.findIndex(
+      (product) => product.id === this.state.selectedProduct.id
+    );
+    const productToChange = products[productToChangeIndex];
+    const changedProduct = {
+      ...productToChange,
+      stored: productToChange.stored - this.state.amount,
+      selected: Number(this.state.amount),
+      activeBasket: true,
+    };
+    products[productToChangeIndex] = changedProduct;
+    this.setState({
+      ...this.state,
       products,
       popUpActive: true,
-      shoppingBasketProducts: [
-        ...prevState.shoppingBasketProducts,
-        shoppingBasketProduct,
-      ],
-    }));
+    });
   };
 
   handleShoppingBasketButton = () => {
@@ -136,7 +162,7 @@ class ShopApp extends React.Component {
 
   componentDidMount = async () => {
     const exchangeRatesData = await fetchExchangeRates();
-    const productsData = await fetchProducts();
+    const productsData = fetchProducts();
 
     const rates = { PLN: 1, ...exchangeRatesData.rates };
     const currencies = Object.entries(rates).map((currencyInfo, index) => ({
@@ -152,7 +178,9 @@ class ShopApp extends React.Component {
       price: product.price,
       description: product.description,
       image: product.image,
-      amount: Math.floor(Math.random() * 10),
+      stored: Math.floor(Math.random() * 10) + 1,
+      selected: 0,
+      activeBasket: false,
     }));
     const categoriesNames = new Set([
       "all",
@@ -173,7 +201,6 @@ class ShopApp extends React.Component {
         : this.props.currencies[0],
       selectedCategory: categories[0],
     });
-    console.log(exchangeRatesData);
   };
 
   render() {
@@ -185,7 +212,6 @@ class ShopApp extends React.Component {
       products,
       categories,
       selectedCategory,
-      shoppingBasketProducts,
       shoppingBasketActive,
       popUpActive,
     } = this.state;
@@ -199,6 +225,10 @@ class ShopApp extends React.Component {
           ),
         ];
     };
+    const addedProduct = products.find(
+      (product) => product.id === selectedProduct.id
+    );
+
     return (
       <>
         <div id="shop">
@@ -218,32 +248,43 @@ class ShopApp extends React.Component {
             selectedProduct={selectedProduct}
             currencies={currencies}
             amount={amount}
-            handleAmountChange={this.handleAmountChange}
+            handleAmountChange={
+              selectedProduct.activeBasket
+                ? this.handleBasketProductAmountChange
+                : this.handleAmountChange
+            }
             handleCurrencySelect={this.handleCurrencySelect}
-            handleMinusClick={this.handleMinusClick}
-            handlePlusClick={this.handlePlusClick}
+            handleAmountChangeClick={
+              selectedProduct.activeBasket
+                ? this.handleBasketProductAmountChangeClick
+                : this.handleAmountChangeClick
+            }
             handleAddToBasketButton={this.handleAddToBasketButton}
           />
           <ShoppingBasket
             shoppingBasketActive={shoppingBasketActive}
-            shoppingBasketProducts={shoppingBasketProducts}
+            products={products}
             selectedCurrency={selectedCurrency}
             handleCurrencySelect={this.handleCurrencySelect}
             currencies={currencies}
-            handleAmountChange={this.handleAmountChange}
-            handleMinusClick={this.handleMinusClick}
-            handlePlusClick={this.handlePlusClick}
+            handleBasketProductAmountChange={
+              this.handleBasketProductAmountChange
+            }
+            handleBasketProductAmountChangeClick={
+              this.handleBasketProductAmountChangeClick
+            }
           />
         </div>
         <AddedProduct
           selectedCurrency={selectedCurrency}
-          selectedProduct={selectedProduct}
+          selectedProduct={addedProduct}
           currencies={currencies}
           amount={amount}
-          handleAmountChange={this.handleAmountChange}
+          handleBasketProductAmountChange={this.handleBasketProductAmountChange}
           handleCurrencySelect={this.handleCurrencySelect}
-          handleMinusClick={this.handleMinusClick}
-          handlePlusClick={this.handlePlusClick}
+          handleBasketProductAmountChangeClick={
+            this.handleBasketProductAmountChangeClick
+          }
           popUpActive={popUpActive}
           handleShoppingBasketButton={this.handleShoppingBasketButton}
           handleAddedProductClose={this.handleAddedProductClose}

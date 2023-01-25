@@ -1,22 +1,24 @@
 import Item from "./item/Item";
 
 const ListItems = (props) => {
-  const items = props.shoppingBasketProducts.map((product) => {
+  const basketProducts = props.products.filter(
+    (product) => product.activeBasket
+  );
+  const items = basketProducts.map((product) => {
     return (
       <Item
         key={product.id}
-        amount={product.amount}
+        amount={product.selected}
         selectedCurrency={props.selectedCurrency}
         selectedProduct={product}
         handleCurrencySelect={props.handleCurrencySelect}
         currencies={props.currencies}
         handleAmountChange={props.handleAmountChange}
-        handleMinusClick={props.handleMinusClick}
-        handlePlusClick={props.handlePlusClick}
+        handleAmountChangeClick={props.handleAmountChangeClick}
       />
     );
   });
-  if (props.shoppingBasketProducts) {
+  if (basketProducts) {
     return <ul>{items}</ul>;
   } else {
     return (

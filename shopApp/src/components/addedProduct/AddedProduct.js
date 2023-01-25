@@ -9,13 +9,13 @@ const AddedProduct = (props) => {
       selectedProduct,
       currencies,
       amount,
-      handleAmountChange,
+      handleBasketProductAmountChange,
       handleCurrencySelect,
-      handleMinusClick,
-      handlePlusClick,
+      handleBasketProductAmountChangeClick,
       handleAddedProductClose,
       handleShoppingBasketButton,
     } = props;
+
     return (
       <div id="addedProductPopUp">
         <div className="content">
@@ -31,10 +31,9 @@ const AddedProduct = (props) => {
               selectedProduct={selectedProduct}
               currencies={currencies}
               amount={amount}
-              handleAmountChange={handleAmountChange}
+              handleAmountChange={handleBasketProductAmountChange}
               handleCurrencySelect={handleCurrencySelect}
-              handleMinusClick={handleMinusClick}
-              handlePlusClick={handlePlusClick}
+              handleAmountChangeClick={handleBasketProductAmountChangeClick}
             />
           </div>
           <div className="buttons">
