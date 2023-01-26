@@ -4,6 +4,7 @@ div#header {
 
 h1 {
   font-size: 32px;
+  cursor: pointer;
 }
 
 div#menu {

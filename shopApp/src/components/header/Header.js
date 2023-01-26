@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Header = (props) => {
   return (
     <div id="header">
-      <h1>Shop App</h1>
+      <h1 onClick={props.handleStartPageClick}>Shop App</h1>
       <div id="menu">
         <div id="selections">
           <Selection

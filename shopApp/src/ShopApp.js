@@ -184,6 +184,15 @@ class ShopApp extends React.Component {
     });
   };
 
+  handleStartPageClick = () => {
+    this.setState({
+      ...this.state,
+      selectedCategory: this.state.categories[0],
+      selectedProduct: this.state.products[0],
+      shoppingBasketActive: false,
+    });
+  };
+
   componentDidMount = async () => {
     const exchangeRatesData = await fetchExchangeRates();
     const productsData = fetchProducts();
@@ -254,6 +263,7 @@ class ShopApp extends React.Component {
       <>
         <div id="shop">
           <Header
+            handleStartPageClick={this.handleStartPageClick}
             labelTitle1={"Category:"}
             value1={selectedCategory.id}
             handleOnChange1={this.handleCategorySelect}
