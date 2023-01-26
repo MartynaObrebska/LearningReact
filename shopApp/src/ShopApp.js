@@ -63,6 +63,8 @@ class ShopApp extends React.Component {
     });
   };
 
+  // Selects
+
   handleCategorySelect = (e) => {
     this.setState({
       ...this.state,
@@ -95,6 +97,8 @@ class ShopApp extends React.Component {
       selectedCurrency: this.state.currencies[e.target.value],
     });
   };
+
+  // Buttons
 
   handleAmountChangeClick = (e) => {
     this.setState({
@@ -140,6 +144,9 @@ class ShopApp extends React.Component {
       ...this.state,
       products,
       popUpActive: true,
+      selectedProduct: products.find(
+        (product) => product.id === this.state.selectedProduct.id
+      ),
     });
   };
 
@@ -225,9 +232,6 @@ class ShopApp extends React.Component {
           ),
         ];
     };
-    const addedProduct = products.find(
-      (product) => product.id === selectedProduct.id
-    );
 
     return (
       <>
@@ -247,7 +251,9 @@ class ShopApp extends React.Component {
             selectedCurrency={selectedCurrency}
             selectedProduct={selectedProduct}
             currencies={currencies}
-            amount={amount}
+            amount={
+              selectedProduct.activeBasket ? selectedProduct.selected : amount
+            }
             handleAmountChange={
               selectedProduct.activeBasket
                 ? this.handleBasketProductAmountChange
@@ -277,7 +283,7 @@ class ShopApp extends React.Component {
         </div>
         <AddedProduct
           selectedCurrency={selectedCurrency}
-          selectedProduct={addedProduct}
+          selectedProduct={selectedProduct}
           currencies={currencies}
           amount={amount}
           handleBasketProductAmountChange={this.handleBasketProductAmountChange}

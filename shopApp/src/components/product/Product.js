@@ -31,14 +31,18 @@ const Product = (props) => {
           handleAmountChangeClick={handleAmountChangeClick}
           handleAddToBasketButton={handleAddToBasketButton}
         />
-        <button
-          id="add"
-          onClick={handleAddToBasketButton}
-          disabled={amount ? false : true}
-          className={amount ? "" : "disabled"}
-        >
-          Add
-        </button>
+        {selectedProduct.activeBasket ? (
+          <p>Item already in the basket!</p>
+        ) : (
+          <button
+            id="add"
+            onClick={handleAddToBasketButton}
+            disabled={amount ? false : true}
+            className={amount ? "" : "disabled"}
+          >
+            Add
+          </button>
+        )}
       </div>
     );
   }

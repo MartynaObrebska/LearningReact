@@ -2,11 +2,20 @@ import "./amount.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Amount = (props) => {
-  const minusValue = (Number(props.amount) - 1).toString();
-  const plusValue = (Number(props.amount) + 1).toString();
+  const {
+    amount,
+    selectedProduct,
+    handleAmountChange,
+    handleAmountChangeClick,
+  } = props;
+  const minusValue = (Number(amount) - 1).toString();
+  const plusValue = (Number(amount) + 1).toString();
 
   const handleDisabled = () => {
-    return props.selectedProduct.stored <= Number(props.amount);
+    if (selectedProduct.activeBasket) {
+      return !selectedProduct.stored;
+    }
+    return selectedProduct.stored <= Number(amount);
   };
 
   return (
@@ -14,26 +23,26 @@ const Amount = (props) => {
       <button
         id="minus"
         value={minusValue}
-        onClick={props.handleAmountChangeClick}
-        disabled={!Number(props.amount)}
-        className={!Number(props.amount) ? "disabled" : ""}
-        data-selectedid={props.selectedProduct.id}
+        onClick={handleAmountChangeClick}
+        disabled={!Number(amount)}
+        className={!Number(amount) ? "disabled" : ""}
+        data-selectedid={selectedProduct.id}
       >
         <FontAwesomeIcon icon="minus" value={minusValue} />
       </button>
       <input
         type="number"
-        value={props.amount}
-        onChange={props.handleAmountChange}
-        data-productid={props.selectedProduct.id}
+        value={amount}
+        onChange={handleAmountChange}
+        data-productid={selectedProduct.id}
       />
       <button
         id="plus"
         value={plusValue}
-        onClick={props.handleAmountChangeClick}
+        onClick={handleAmountChangeClick}
         disabled={handleDisabled()}
         className={handleDisabled() ? "disabled" : ""}
-        data-selectedid={props.selectedProduct.id}
+        data-selectedid={selectedProduct.id}
       >
         <FontAwesomeIcon icon="plus" value={plusValue} />
       </button>
