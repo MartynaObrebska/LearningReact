@@ -1,8 +1,7 @@
 h2#summary {
   border-top: 1px solid black;
-  text-align: end;
 }
 
-h2#summary label#amount {
-  visibility: hidden;
+h2#summary div#counter {
+  text-align: right;
 }

@@ -6,11 +6,12 @@ import {
   faMinus,
   faShoppingBasket,
   faXmark,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
 import ShopApp from "./ShopApp";
 
-library.add(faPlus, faMinus, faShoppingBasket, faXmark);
+library.add(faPlus, faMinus, faShoppingBasket, faXmark, faTrashCan);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<ShopApp />);

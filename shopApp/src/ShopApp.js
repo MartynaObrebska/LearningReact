@@ -150,6 +150,23 @@ class ShopApp extends React.Component {
     });
   };
 
+  handleRemoveFromBasketButton = (e) => {
+    const products = this.state.products;
+    const basketProductToChangeIndex = products.findIndex(
+      (product) =>
+        product.id === Number(e.currentTarget.getAttribute("data-selectedid"))
+    );
+    const basketProductToChange = products[basketProductToChangeIndex];
+    basketProductToChange.stored =
+      basketProductToChange.stored + basketProductToChange.selected;
+    basketProductToChange.selected = 0;
+    basketProductToChange.activeBasket = false;
+    this.setState({
+      ...this.state,
+      products,
+    });
+  };
+
   handleShoppingBasketButton = () => {
     this.setState({
       ...this.state,
@@ -266,6 +283,7 @@ class ShopApp extends React.Component {
                 : this.handleAmountChangeClick
             }
             handleAddToBasketButton={this.handleAddToBasketButton}
+            handleShoppingBasketButton={this.handleShoppingBasketButton}
           />
           <ShoppingBasket
             shoppingBasketActive={shoppingBasketActive}
@@ -279,6 +297,7 @@ class ShopApp extends React.Component {
             handleBasketProductAmountChangeClick={
               this.handleBasketProductAmountChangeClick
             }
+            handleRemoveFromBasketButton={this.handleRemoveFromBasketButton}
           />
         </div>
         <AddedProduct

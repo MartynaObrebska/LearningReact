@@ -11,13 +11,18 @@ div#item img {
 }
 
 div#item h3 {
-  flex-grow: 1;
+  width: 250px;
   margin: 0 20px;
   text-align: left;
 }
 
 div#item select {
   visibility: hidden;
+}
+
+div#item div#counter {
+  flex-grow: 1;
+  text-align: right;
 }
 
 @media (max-width: 800px) {

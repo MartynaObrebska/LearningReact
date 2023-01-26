@@ -11,6 +11,7 @@
 import "./counter.css";
 import Selection from "../selection/Selection";
 import Amount from "../amount/Amount";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Counter = (props) => {
   const {
@@ -23,14 +24,15 @@ const Counter = (props) => {
     selectedProduct,
     labelName,
     handleAmountChangeClick,
+    shoppingBasketActive,
+    handleRemoveFromBasketButton,
   } = props;
   const { id, rate } = selectedCurrency;
   const value = (amount * rate * price).toFixed(2);
-
   return (
     <div id="counter">
-      <span>{labelName}</span>
-      {selectedProduct && (
+      {labelName && <span>{labelName}</span>}
+      {(selectedProduct || shoppingBasketActive) && (
         <span className="price">
           {value > 0 ? value : (rate * price).toFixed(2)}
         </span>
@@ -49,8 +51,16 @@ const Counter = (props) => {
           selectedProduct={selectedProduct}
           handleAmountChange={handleAmountChange}
           handleAmountChangeClick={handleAmountChangeClick}
-          handleAddToBasketButton={props.handleAddToBasketButton}
         />
+      )}
+      {handleRemoveFromBasketButton && (
+        <button
+          className={selectedProduct.selected ? "remove" : "remove active"}
+          onClick={handleRemoveFromBasketButton}
+          data-selectedid={selectedProduct.id}
+        >
+          <FontAwesomeIcon icon="trash-can" />
+        </button>
       )}
     </div>
   );

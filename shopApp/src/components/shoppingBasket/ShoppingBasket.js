@@ -3,27 +3,39 @@ import ListItems from "../listItems/ListItems";
 import Summary from "./summary/Summary";
 
 const ShoppingBasket = (props) => {
-  if (props.shoppingBasketActive) {
+  const {
+    products,
+    handleBasketProductAmountChange,
+    currencies,
+    selectedCurrency,
+    handleCurrencySelect,
+    handleBasketProductAmountChangeClick,
+    shoppingBasketActive,
+    handleRemoveFromBasketButton,
+  } = props;
+  const basketProducts = products.filter((product) => product.activeBasket);
+  if (shoppingBasketActive) {
     return (
       <div id="shoppingBasket">
         <h2>Your shopping basket:</h2>
         <ListItems
-          products={props.products}
-          handleAmountChange={props.handleBasketProductAmountChange}
-          handleAmountChangeClick={props.handleBasketProductAmountChangeClick}
-          selectedCurrency={props.selectedCurrency}
-          currencies={props.currencies}
-          handleCurrencySelect={props.handleCurrencySelect}
+          products={basketProducts}
+          handleAmountChange={handleBasketProductAmountChange}
+          handleAmountChangeClick={handleBasketProductAmountChangeClick}
+          selectedCurrency={selectedCurrency}
+          currencies={currencies}
+          handleCurrencySelect={handleCurrencySelect}
+          handleRemoveFromBasketButton={handleRemoveFromBasketButton}
         />
-        <Summary
-          products={props.products}
-          selectedCurrency={props.selectedCurrency}
-          handleCurrencySelect={props.handleCurrencySelect}
-          currencies={props.currencies}
-          handleAmountChange={props.handleAmountChange}
-          handleAmountChangeClick={props.handleAmountChangeClick}
-          handleAddToBasketButton={props.handleAddToBasketButton}
-        />
+        {basketProducts.length > 0 && (
+          <Summary
+            shoppingBasketActive={shoppingBasketActive}
+            products={basketProducts}
+            selectedCurrency={selectedCurrency}
+            handleCurrencySelect={handleCurrencySelect}
+            currencies={currencies}
+          />
+        )}
       </div>
     );
   }

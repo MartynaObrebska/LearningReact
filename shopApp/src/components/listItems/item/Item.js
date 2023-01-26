@@ -9,6 +9,7 @@ const Item = (props) => {
     handleAmountChange,
     handleAmountChangeClick,
     handleAddToBasketButton,
+    handleRemoveFromBasketButton,
   } = props;
   const { title, image, price } = selectedProduct;
 
@@ -25,6 +26,7 @@ const Item = (props) => {
         handleAmountChange={handleAmountChange}
         handleAmountChangeClick={handleAmountChangeClick}
         handleAddToBasketButton={handleAddToBasketButton}
+        handleRemoveFromBasketButton={handleRemoveFromBasketButton}
       />
     </div>
   );

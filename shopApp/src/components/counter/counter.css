@@ -21,6 +21,19 @@ div#price {
   margin-right: 20px;
 }
 
+button.remove {
+  color: #ddd;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  inline-size: 30px;
+}
+
+button.remove:hover,
+button.active {
+  color: #555;
+}
+
 @media (max-width: 800px) {
   div#counter select {
     width: 70px;

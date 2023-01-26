@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./product.css";
 import Counter from "../counter/Counter";
+
 const Product = (props) => {
   if (props.selectedProduct.image) {
     const {
@@ -11,6 +13,7 @@ const Product = (props) => {
       handleCurrencySelect,
       handleAmountChangeClick,
       handleAddToBasketButton,
+      handleShoppingBasketButton,
     } = props;
     const { title, category, image, description, price } = selectedProduct;
     return (
@@ -19,8 +22,8 @@ const Product = (props) => {
         <h3 id="category">{category}</h3>
         <img alt={title} src={image}></img>
         <p>{description}</p>
-        <span className="price">Price:</span>
         <Counter
+          labelName="Price:"
           amount={amount}
           price={price}
           selectedCurrency={selectedCurrency}
@@ -32,7 +35,16 @@ const Product = (props) => {
           handleAddToBasketButton={handleAddToBasketButton}
         />
         {selectedProduct.activeBasket ? (
-          <p>Item already in the basket!</p>
+          <>
+            <p>Item already in the basket!</p>
+            <button
+              className="shoppingBasket"
+              onClick={handleShoppingBasketButton}
+            >
+              <FontAwesomeIcon icon="shopping-basket" />
+              Go to shopping basket
+            </button>
+          </>
         ) : (
           <button
             id="add"
