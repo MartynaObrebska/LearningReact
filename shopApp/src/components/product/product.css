@@ -1,44 +1,60 @@
-div#product {
+div.product {
   text-align: center;
 }
 
-h2 {
+div.product h2 {
   margin: 30px auto 0;
   font-size: 24px;
 }
 
-#category {
+div.product h3 {
   margin-top: 0;
   font-weight: 100;
   color: #aaa;
 }
 
-img {
-  width: 100%;
+div.product img {
   max-width: 300px;
   max-height: 400px;
 }
 
-p {
+div.product p {
+  margin: 20px;
+}
+
+div.product p.description {
+  margin: 20px;
   text-align: justify;
 }
 
-button#add {
-  width: 60px;
-  border-radius: 10px 10px;
-  margin: 15px;
+button.add {
+  margin: 10px;
   padding: 3px 10px;
-  font-size: 14px;
+  width: 100px;
+}
+
+button.shoppingBasket {
+  margin: 10px;
+  padding: 3px 10px;
+  width: 200px;
+}
+
+button.shoppingBasket svg {
+  margin-right: 10px;
 }
 
 @media (max-width: 800px) {
-  h2 {
+  div.product h2 {
     font-size: 18px;
   }
 
-  img {
+  div.product img {
     width: 70%;
     max-width: 150px;
     max-height: 200px;
+  }
+
+  div.product p.description {
+    margin: 20px 0;
   }
 }

@@ -19,7 +19,7 @@ const Amount = (props) => {
   };
 
   return (
-    <label id="amount">
+    <div className="amount">
       <button
         id="minus"
         value={minusValue}
@@ -46,7 +46,7 @@ const Amount = (props) => {
       >
         <FontAwesomeIcon icon="plus" value={plusValue} />
       </button>
-    </label>
+    </div>
   );
 };
 export default Amount;

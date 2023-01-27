@@ -14,7 +14,7 @@ const Item = (props) => {
   const { title, image, price } = selectedProduct;
 
   return (
-    <div id="item">
+    <div className="item">
       <img alt={title} src={image}></img>
       <h3>{title}</h3>
       <Counter

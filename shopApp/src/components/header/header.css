@@ -1,4 +1,4 @@
-div#header {
+div.header {
   text-align: center;
 }
 
@@ -7,17 +7,20 @@ h1 {
   cursor: pointer;
 }
 
-div#menu {
+div.menu {
   display: flex;
-  text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid black;
   align-items: center;
   align-content: flex-end;
 }
 
-button#shoppingBasketBtn {
+div.menu .selections {
   flex-grow: 1;
+  display: flex;
+}
+
+div.menu button.shoppingBasketBtn {
   color: #555;
   background-color: transparent;
   border: none;
@@ -30,13 +33,16 @@ button#shoppingBasketBtn {
     font-size: 20px;
   }
 
-  button#shoppingBasketBtn {
-    font-size: 14px;
+  div.menu button.shoppingBasketBtn {
+    font-size: 20px;
   }
 }
 
-@media (max-width: 430px) {
-  button#shoppingBasketBtn {
+@media (max-width: 450px) {
+  div.menu .selections {
+    flex-direction: column;
+  }
+  div.menu button.shoppingBasketBtn {
     position: fixed;
     top: 0;
     right: 0;

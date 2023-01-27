@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = (props) => {
   return (
-    <div id="header">
+    <div className="header">
       <h1 onClick={props.handleStartPageClick}>Shop App</h1>
-      <div id="menu">
-        <div id="selections">
+      <div className="menu">
+        <div className="selections">
           <Selection
             labelTitle={props.labelTitle1}
             value={props.value1}
@@ -22,7 +22,7 @@ const Header = (props) => {
           />
         </div>
         <button
-          id="shoppingBasketBtn"
+          className="shoppingBasketBtn"
           onClick={props.handleShoppingBasketButton}
         >
           <FontAwesomeIcon icon="shopping-basket" />

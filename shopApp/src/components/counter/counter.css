@@ -1,24 +1,13 @@
-div#counter {
-  margin: 10px 2%;
-}
-
-span {
-  display: inline-block;
-  margin: 10px;
-  text-align: center;
+div.counter {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 500px;
 }
 
 span.price {
   width: 80px;
-}
-
-select {
-  width: 100px;
-}
-
-div#price {
-  display: inline-block;
-  margin-right: 20px;
+  text-align: center;
 }
 
 button.remove {
@@ -35,7 +24,11 @@ button.active {
 }
 
 @media (max-width: 800px) {
-  div#counter select {
-    width: 70px;
+  div.counter {
+    max-width: 350px;
+  }
+
+  span.price {
+    width: 60px;
   }
 }

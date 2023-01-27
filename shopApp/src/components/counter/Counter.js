@@ -30,7 +30,7 @@ const Counter = (props) => {
   const { id, rate } = selectedCurrency;
   const value = (amount * rate * price).toFixed(2);
   return (
-    <div id="counter">
+    <div className="counter">
       {labelName && <span>{labelName}</span>}
       {(selectedProduct || shoppingBasketActive) && (
         <span className="price">

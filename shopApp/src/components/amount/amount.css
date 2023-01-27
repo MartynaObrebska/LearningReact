@@ -1,20 +1,15 @@
-label#amount {
-  display: inline-flex;
-  align-items: center;
+div.amount {
+  display: flex;
 }
 
-label#amount input {
-  width: 50px;
+div.amount input {
+  box-sizing: border-box;
+  width: 70px;
+  height: 30px;
   margin: 0;
   text-align: center;
   border: 1px solid #555;
-}
-button {
-  width: 30px;
-  height: 30px;
-  color: #fff;
-  background-color: #555;
-  border: 2px solid #555;
+  font-size: 14px;
 }
 
 button#minus {
@@ -32,19 +27,22 @@ button.disabled {
 }
 
 @media (max-width: 800px) {
-  input {
-    width: 40px;
+  div.amount input {
+    width: 50px;
+    height: 24px;
   }
-
-  button#plus,
-  button#minus,
-  button#add {
-    height: 22px;
-    font-size: 13px;
-  }
-
   button#plus,
   button#minus {
-    width: 22px;
+    width: 24px;
+  }
+}
+
+@media (max-width: 350px) {
+  div.amount input {
+    width: 30px;
+  }
+  button#plus,
+  button#minus {
+    width: 24px;
   }
 }

@@ -11,7 +11,6 @@ div.content {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80vw;
-  height: 60vh;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -20,33 +19,35 @@ div.content {
   border-radius: 15px;
 }
 
-div.popUpHeader {
+div.content div.popUpHeader {
   display: flex;
   border-bottom: 1px solid black;
 }
 
-div.popUpHeader h2 {
+div.content div.popUpHeader h2 {
   flex-grow: 1;
   margin: 20px 10px;
 }
 
-div.popUpHeader button {
+div.content div.popUpHeader button {
   font-size: 30px;
   background-color: transparent;
   color: #555;
   border: none;
   align-self: flex-start;
 }
-div.item {
+div.content div.item {
+  border: none;
+  padding: 0;
   flex-grow: 1;
 }
 
-div.buttons {
+div.content div.buttons {
   display: flex;
   border-top: 1px solid black;
 }
 
-div.buttons button {
+div.content div.buttons button {
   flex-grow: 1;
   height: 40px;
   margin: 20px;
@@ -58,14 +59,14 @@ div.buttons button {
   text-align: center;
 }
 
-div.buttons button.shoppingBasket {
+div.content div.buttons button.shoppingBasket {
   background-color: #555;
   color: #fff;
   border: 1px solid #555;
   font-weight: 600;
 }
 
-div.buttons button.shoppingBasket svg {
+div.content div.buttons button.shoppingBasket svg {
   margin-right: 10px;
 }
 
@@ -80,6 +81,22 @@ div.background {
   div.content {
     width: 90vw;
     padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  div.content div.buttons button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  div.content div.buttons {
+    flex-direction: column;
+  }
+
+  div.content div.buttons button {
+    width: auto;
   }
 }
 

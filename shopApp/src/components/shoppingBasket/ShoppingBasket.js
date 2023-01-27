@@ -16,7 +16,7 @@ const ShoppingBasket = (props) => {
   const basketProducts = products.filter((product) => product.activeBasket);
   if (shoppingBasketActive) {
     return (
-      <div id="shoppingBasket">
+      <div className="shoppingBasket">
         <h2>Your shopping basket:</h2>
         <ListItems
           products={basketProducts}

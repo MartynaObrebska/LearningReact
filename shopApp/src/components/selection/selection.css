@@ -1,23 +1,30 @@
-label {
-  display: inline-block;
+div.selection {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+div.selection label {
+  width: 80px;
+  text-align: right;
 }
 
-select,
-input {
+div.selection select {
+  flex-grow: 1;
   box-sizing: border-box;
   height: 30px;
-  width: 180px;
+  width: 50px;
   margin: 15px;
-  padding: 3px 10px;
   font-size: 14px;
   border: 1px solid black;
 }
 
 @media (max-width: 800px) {
-  select,
-  input {
-    width: 100px;
-    height: 22px;
-    font-size: 10px;
+  div.selection label {
+    width: 60px;
+  }
+  div.selection select {
+    height: 24px;
+    width: 40px;
+    font-size: 11px;
   }
 }

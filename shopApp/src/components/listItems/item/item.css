@@ -1,4 +1,4 @@
-div#item {
+div.item {
   display: flex;
   align-items: center;
   margin: 50px 20px;
@@ -6,27 +6,25 @@ div#item {
   border-top: 1px solid #ddd;
 }
 
-div#item img {
+div.item img {
   width: 60px;
 }
 
-div#item h3 {
+div.item h3 {
+  flex-grow: 1;
   width: 250px;
   margin: 0 20px;
   text-align: left;
+  font-size: 16px;
 }
 
-div#item select {
-  visibility: hidden;
-}
-
-div#item div#counter {
-  flex-grow: 1;
-  text-align: right;
-}
-
-@media (max-width: 800px) {
-  div#item img {
-    width: 60px;
+@media (max-width: 500px) {
+  div.item {
+    flex-direction: column;
+  }
+  div.item h3 {
+    flex-grow: 0;
+    margin: 20px;
+    text-align: center;
   }
 }

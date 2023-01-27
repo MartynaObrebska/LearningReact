@@ -13,7 +13,7 @@ const Summary = (props) => {
   const prices = products.map((product) => product.price * product.selected);
   const total = [...prices].reduce((acc, val) => acc + val, 0);
   return (
-    <h2 id="summary">
+    <h2 className="summary">
       <Counter
         shoppingBasketActive={shoppingBasketActive}
         amount="1"

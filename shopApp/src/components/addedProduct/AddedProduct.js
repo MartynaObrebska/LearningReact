@@ -17,7 +17,7 @@ const AddedProduct = (props) => {
     } = props;
 
     return (
-      <div id="addedProductPopUp">
+      <div className="addedProductPopUp">
         <div className="content">
           <div className="popUpHeader">
             <h2>Item added to shopping basket!</h2>
@@ -25,17 +25,15 @@ const AddedProduct = (props) => {
               <FontAwesomeIcon icon="xmark" />
             </button>
           </div>
-          <div className="item">
-            <Item
-              selectedCurrency={selectedCurrency}
-              selectedProduct={selectedProduct}
-              currencies={currencies}
-              amount={amount}
-              handleAmountChange={handleBasketProductAmountChange}
-              handleCurrencySelect={handleCurrencySelect}
-              handleAmountChangeClick={handleBasketProductAmountChangeClick}
-            />
-          </div>
+          <Item
+            selectedCurrency={selectedCurrency}
+            selectedProduct={selectedProduct}
+            currencies={currencies}
+            amount={amount}
+            handleAmountChange={handleBasketProductAmountChange}
+            handleCurrencySelect={handleCurrencySelect}
+            handleAmountChangeClick={handleBasketProductAmountChangeClick}
+          />
           <div className="buttons">
             <button onClick={handleAddedProductClose}>Add more products</button>
             <button

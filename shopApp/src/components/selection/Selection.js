@@ -1,13 +1,16 @@
 import "./selection.css";
 import Options from "./options/Options";
 
-const Selection = (props) => (
-  <label className="selection">
-    {props.labelTitle}
-    <select value={props.value} onChange={props.handleOnChange}>
-      {props.items.length > 1 && <Options items={props.items} />}
-    </select>
-  </label>
-);
+const Selection = (props) => {
+  const { items, labelTitle, value, handleOnChange } = props;
+  return (
+    <div className="selection">
+      {labelTitle && <label>{labelTitle}</label>}
+      <select value={value} onChange={handleOnChange}>
+        {items.length > 1 && <Options items={items} />}
+      </select>
+    </div>
+  );
+};
 
 export default Selection;

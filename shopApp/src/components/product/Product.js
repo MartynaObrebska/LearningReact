@@ -17,11 +17,11 @@ const Product = (props) => {
     } = props;
     const { title, category, image, description, price } = selectedProduct;
     return (
-      <div id="product">
+      <div className="product">
         <h2>{title}</h2>
-        <h3 id="category">{category}</h3>
+        <h3>{category}</h3>
         <img alt={title} src={image}></img>
-        <p>{description}</p>
+        <p className="description">{description}</p>
         <Counter
           labelName="Price:"
           amount={amount}
@@ -47,10 +47,9 @@ const Product = (props) => {
           </>
         ) : (
           <button
-            id="add"
             onClick={handleAddToBasketButton}
             disabled={amount ? false : true}
-            className={amount ? "" : "disabled"}
+            className={amount ? "add" : "add disabled"}
           >
             Add
           </button>
